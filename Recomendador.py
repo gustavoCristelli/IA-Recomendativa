@@ -1,36 +1,9 @@
-# --- 1. Representação do Conhecimento com FRAMES ---
+# Importa a base de conhecimento de filmes do arquivo Database.py
+from Database import base_conhecimento_filmes
 
-# A base de dados continua a mesma, representando os filmes como dicionários (Frames).
-base_conhecimento_filmes = {
-    "Oppenheimer": {
-        "diretor": "Christopher Nolan",
-        "genero": ["Biografia", "Drama"],
-        "atores": ["Cillian Murphy", "Emily Blunt"],
-        "ano": 2023
-    },
-    "Interestelar": {
-        "diretor": "Christopher Nolan",
-        "genero": ["Ficção Científica", "Aventura"],
-        "atores": ["Matthew McConaughey", "Anne Hathaway"],
-        "ano": 2014
-    },
-    "Titanic": {
-        "diretor": "James Cameron",
-        "genero": ["Romance", "Drama"],
-        "atores": ["Leonardo DiCaprio", "Kate Winslet"],
-        "ano": 1997
-    },
-    "A Origem": {
-        "diretor": "Christopher Nolan",
-        "genero": ["Ficção Científica", "Ação"],
-        "atores": ["Leonardo DiCaprio", "Elliot Page"],
-        "ano": 2010
-    }
-}
+# --- LÓGICA (Regra de Recomendação) ---
+# A função de lógica permanece a mesma, pois a regra é independente da base de dados.
 
-# --- 2. Aplicação da LÓGICA (Regra de Recomendação) ---
-
-# A função de lógica não muda. Ela ainda faz a busca dos filmes do mesmo diretor.
 def recomendar_por_diretor(filme_gostado, base_de_conhecimento):
     """
     Função que aplica a regra de recomendação baseada no diretor.
@@ -43,7 +16,6 @@ def recomendar_por_diretor(filme_gostado, base_de_conhecimento):
     list: Uma lista de filmes recomendados.
     """
     
-    # O método .get() é usado para evitar erros caso o filme não exista.
     dados_filme = base_de_conhecimento.get(filme_gostado)
     if not dados_filme:
         return []
@@ -58,7 +30,8 @@ def recomendar_por_diretor(filme_gostado, base_de_conhecimento):
             
     return filmes_recomendados
 
-# --- 3. Execução Interativa do Sistema ---
+# --- EXECUÇÃO INTERATIVA DO SISTEMA ---
+# A execução do programa agora utiliza a base de dados importada.
 
 def main():
     """
@@ -67,14 +40,10 @@ def main():
     print("Olá! Bem-vindo ao nosso sistema de recomendação de filmes.")
     print("Por favor, escolha um filme da nossa lista e digite o nome completo:")
     
-    # Mostra a lista de filmes disponíveis para o usuário
-    lista_filmes_disponiveis = ", ".join(base_conhecimento_filmes.keys())
+    lista_filmes_disponiveis = "\n -".join(base_conhecimento_filmes.keys())
     print(f"Filmes disponíveis: {lista_filmes_disponiveis}")
 
-    # A entrada do usuário é capturada aqui, tornando o código interativo.
     filme_escolhido_pelo_usuario = input("\nDigite o nome do filme que você gostou: ")
-    
-    # Capitaliza a primeira letra de cada palavra para evitar erros de digitação.
     filme_escolhido_pelo_usuario = filme_escolhido_pelo_usuario.title()
 
     recomendacoes = recomendar_por_diretor(filme_escolhido_pelo_usuario, base_conhecimento_filmes)
@@ -87,6 +56,5 @@ def main():
         print(f"\nDesculpe, '{filme_escolhido_pelo_usuario}' não está na nossa base ou não temos recomendações para ele.")
         print("Tente outro filme da lista.")
 
-# Chama a função principal para iniciar o programa
 if __name__ == "__main__":
     main()
