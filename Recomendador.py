@@ -1,8 +1,8 @@
 # Importa a base de conhecimento de filmes do arquivo Database.py
 from Database import base_conhecimento_filmes
 
-# --- LÓGICA (Regra de Recomendação) ---
-# A função de lógica permanece a mesma, pois a regra é independente da base de dados.
+# --- LÓGICA ---
+
 
 def recomendar_por_diretor(filme_gostado, base_de_conhecimento):
     """
@@ -31,7 +31,7 @@ def recomendar_por_diretor(filme_gostado, base_de_conhecimento):
     return filmes_recomendados
 
 # --- EXECUÇÃO INTERATIVA DO SISTEMA ---
-# A execução do programa agora utiliza a base de dados importada.
+# A execução utiliza o Database.
 
 def main():
     """
